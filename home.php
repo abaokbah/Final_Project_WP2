@@ -79,17 +79,17 @@ and open the template in the editor.
     
     <div id="content">
         <div id = 'display'>
-                <?php
+                <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
                     $result = mysql_query("select * from abaokbah.mempics ORDER BY PID DESC");
                     while($row = mysql_fetch_array($result)) 
                     {
                         $row['picname'] = str_replace(' ', '', $row['picname']);
-                        echo "<div><span id='picinfo'>Posted by:". "<a href='http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name="
+                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
                         .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
                                 .$row['OrderDate'] ."</span></div>";
                         
                         echo "<center><p>". $row['caption']. "</p></center>";
-                        echo "<center><img src=../pics/" . $row['picname'] ."></center>";
+                        echo "<center><img src=./pics/" . $row['picname'] ."></center>";
 
                     }
                 ?>

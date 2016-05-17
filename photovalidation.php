@@ -10,6 +10,7 @@
            }
     
     $filename = $_FILES["myfile"]["name"];
+    debug_to_console($filename);
     $filename = str_replace(' ', '', $filename);
     $allowed_Ext = array("gif", "jpeg", "jpg", "png");
     $temp = explode(".", $filename);
@@ -26,12 +27,15 @@
             echo "<br>";
             echo "Return Code: " . $_FILES["myfile"]["error"] . "<br>";
         } else {
-            if (file_exists("../pics/" . $filename)) {
+            if (file_exists("./pics/" . $filename)) {
                 //echo "File already exsists.";
             } else {
-                move_uploaded_file($_FILES["myfile"]["tmp_name"], "../pics/" . $filename);
+                move_uploaded_file($_FILES["myfile"]["tmp_name"], "./pics/" . $filename);
+                
+                //echo $_FILES["myfile"]["tmp_name"];
+                //echo "./pics/" . $filename;
             }
-            echo "<center><img src= ../pics/" . $filename . "><center>";
+            echo "<center><img src= ./pics/" . $filename . "><center>";
             array_push($_SESSION['pics'], $filename);
             $pic=$filename;
             $user = $_SESSION['SESS_FIRST_NAME'];
@@ -45,4 +49,15 @@
         echo "<br>";
     }
     //setcookie("list", serialize($_SESSION["pics"]), time() + (60*60*24*7));
+?>
+
+
+<?php
+
+function debug_to_console( $data ) {
+
+    $output = "<script>console.log( 'Debug Objects: " . $data . "' );</script>";
+    echo $output;
+}
+
 ?>
