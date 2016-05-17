@@ -1,0 +1,127 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 13, 2014, 11:41:38 PM
+    Author     : alibaokbah
+*/
+
+html {
+    background: lightblue;
+}
+
+body {
+    background: #FFDC48;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+h2 {
+    font-family: monaco; color: orange; font-weight: bold; margin-left: 30px;
+}
+
+p {
+    font-family: monaco; 
+    color: #3D53B2; 
+    font-weight: bold; 
+    margin-left: 20px; 
+    text-align: center; 
+    background: lightgray; 
+    display: inline;
+}
+
+#menutable {
+    width:100%; background-color: #BDBCB7;
+    
+}
+
+#menutable td {
+    font-family: monaco; font-size: 16px; padding-right:15px; padding-left: 60px; text-align: center;
+}
+
+#leftpillar, #rightpillar {
+    background: #FFDC48;
+    width: 10%;
+    height: 100%;
+    //position: fixed;
+}
+
+#leftpillarr, #rightpillarr {
+    background: black;
+    width: 140px;
+    height: 100%;
+}
+
+#leftpillar {
+    
+}
+
+#rightpillar {
+    
+}
+
+#display {
+    
+}
+
+#display div {
+    background: lightgray;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: calibri;
+    //margin-left: 15px;
+}
+
+#display img {
+    width: auto;
+    height: auto;
+    margin: 2%;
+    max-height: 500px;
+    max-width: 500px;
+    border: 4px dashed lightgray;
+    border-collapse:separate;
+}
+
+#footer{
+    text-align: center;
+    //float: center;
+    font-family: calibri;
+    font-size: 20px;
+    background-color: #BDBCB7;
+    font-weight: bold;
+    float:bottom;
+}
+
+li {
+    margin-left: 30px;
+    color: #3D53B2;
+    font-family: monaco;
+    font-weight: bold;
+}
+
+#info {
+    background: lightgray;
+}
+
+#upload, #file {
+    display:inline;
+}
+
+#date {
+    background: lightgray;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: calibri;
+    float: right;
+    margin-right: 15px;
+}
+
+#picinfo {
+    margin-left: 15px;
+}
+
+#indexform {
+    margin-top: 150px;
+}
