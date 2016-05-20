@@ -9,7 +9,11 @@ and open the template in the editor.
 */
 
 html {
-    background: lightblue;
+    background: #5F3C6B;
+}
+
+.innerinfo {
+    display: inline-block;
 }
 
 body {
@@ -124,4 +128,15 @@ li {
 
 #indexform {
     margin-top: 150px;
+}
+#hotsinfo {
+    position: relative;
+    bottom:30px;
+}
+
+p#role {
+    display:inline-block;
+    position:relative;
+    bottom:15px; right:183px;
+    //margin-left:1px;display:block;margin:0px;
 }

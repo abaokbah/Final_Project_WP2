@@ -40,8 +40,8 @@ and open the template in the editor.
         <!-- Header section -->
         <table class="upperBanner">
             <a href="home.php">
-                <center><img id="upbanner" src="yellow-and-blue_00435238.jpg" alt="Blue and yellow share" 
-                            width="100%" height="320">
+                <center><img id="upbanner" src=" HOTS-Open-Beta-screen.png" alt="heroes background"
+                            width="100%" height="200"> <!-- yellow-and-blue_00435238.jpg -->
                 </center></a>
         </table> 
         <!-- Content menu section -->

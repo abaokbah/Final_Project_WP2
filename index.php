@@ -38,6 +38,13 @@ and open the template in the editor.
         </style>
     </head>
     <body>
+        
+        <audio controls autoplay loop>
+            <source src="hotsTheme.wav" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div id='welcome'>The Storm Colosseum</div>
         <form id = "indexform" name="loginform" action="login_exec.php" method="post">
             <table border="0" align="center" cellpadding="2" cellspacing="5">
             <tr>
@@ -58,16 +65,16 @@ and open the template in the editor.
             </td>
             </tr>
             <tr>
-                <td width="116"><div align="right" style="color: lightgray; font-family: monaco;">Username</div></td>
+                <td width="116"><div align="right" style="color: #3F0A73; font-family: monaco;">Username</div></td>
                 <td width="177"><input name="username" type="text" /></td>
             </tr>
             <tr>
-                <td><div align="right" style="color: lightgray; font-family: monaco;">Password</div></td>
+                <td><div align="right" style="color: #3F0A73; font-family: monaco;">Password</div></td>
                 <td><input name="password" type="password" /></td>
             </tr>
             <tr>
-                <td><div align="right" ></div></td>
-                <td><input name="" type="submit" value="Login" /></td>
+                <!--<td><div align="right" ></div></td>-->
+                <td><input name="loging" class="button button1" type="submit" value="Login" /></td>
                 <td></td>
             </tr>
             <tr>
