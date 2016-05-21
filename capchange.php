@@ -16,6 +16,10 @@
        htmlspecialchars($cap);
        strip_tags($cap);
        stripcslashes($cap);
+       
+       htmlspecialchars($pic);
+       strip_tags($pic);
+       stripcslashes($pic);
     }
     
 

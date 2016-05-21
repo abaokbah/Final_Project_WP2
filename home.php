@@ -109,7 +109,7 @@ and open the template in the editor.
                         //var c = document.createElement("p");
                         p.innerHTML = request.responseText;
                         document.getElementById('display').appendChild(p);
-                        location.reload();
+                        //location.reload();
                     }
                 };
                 request.open('post', 'photovalidation.php', true);

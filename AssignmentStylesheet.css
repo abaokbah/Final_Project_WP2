@@ -14,6 +14,19 @@ html {
 
 .innerinfo {
     display: inline-block;
+    position:relative;
+    //buttom:100px;
+}
+
+div.innerinfo {
+    position: relative;
+    top:-14px;
+    
+}
+
+div#hotsinfo.innerinfo {
+    position: relative;
+    top:-40px;
 }
 
 body {
@@ -107,6 +120,7 @@ li {
 
 #info {
     background: lightgray;
+    height: 220px;
 }
 
 #upload, #file {

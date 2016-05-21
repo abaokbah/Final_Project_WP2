@@ -64,13 +64,15 @@ and open the template in the editor.
         
         $res = mysql_query("select * from abaokbah.member WHERE username='$user'");
         $ress = mysql_query("select * from abaokbah.member WHERE username='$user'");
-        $fetcher = mysql_query("select fav_hero1,fav_hero2,fav_hero3 from abaokbah.member WHERE username='$user'");
+        $fetcher = mysql_query("select fav_hero1,fav_hero2,fav_hero3,role from abaokbah.member WHERE username='$user'");
         if($fetcher){
             while($f = mysql_fetch_array($ress))
             {
                 $fav1 = $f['fav_hero1'];
                 $fav2 = $f['fav_hero2'];
                 $fav3 = $f['fav_hero3'];
+                $battleground = $f['battleground'];
+                $role = $f['role'];
             }
         }
         //$fav1 = mysql_result($fetcher,0);
@@ -89,42 +91,61 @@ and open the template in the editor.
                     echo "<li> First name: " . $row['fname'] . "</li>";
                     echo "<li> Last name: " . $row['lname'] . "</li>";
                     echo "<li> Gender: " . $row['gender'] . "</li>";
-                    //echo "<li> fav_hero1: " . $fav1 . "</li>";
-                    //echo "<li> fav_hero1: " . $row['fav_hero1'] . "</li>";
+                    echo "<li> Role: " . $role . "</li>";
+                    echo "<li> Favorite Battleground: <br><li>" . $row['battleground'] . "</li></li>";
+                    echo "<img id='holder1' src='hero_icons/DragonShire.png' alt='favorite battleground' width='100' height='40'"
+                    . "style='position:relative; left:50px;'>";
                     //echo "<li> fav_hero2: " . $row['fav_hero2'] . "</li>";
                     echo "</tr>";
             }
         }
+        
         echo "</div>";
         echo "<div id='hotsinfo' class='innerinfo' style='margin-left:50px;'>"
-                //. "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
-                /*. "<img id='holder1' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav1\",this)'>" //\"$fav1\"
-                . "<img id='holder2' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav2\",this)'>"
-                . "<img id='holder3' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav3\",this)'>"
-                */ // THIS IS A WORKING CODE!!!!
-                
-                /*. "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
-                . "<img id='holder1' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav1\",this) alt='favorite hero' width='50' height='50'>" //\"$fav1\"
-                . "<img id='holder2' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav2\",this) alt='favorite hero' width='50' height='50'>"
-                . "<img id='holder3' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav3\",this) alt='favorite hero' width='50' height='50'>"
-                    */
-                
                 . "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
                 . "<img id='holder1' src='hero_icons/$fav1.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>" //\"$fav1\"
                 . "<img id='holder2' src='hero_icons/$fav2.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
                 . "<img id='holder3' src='hero_icons/$fav3.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
                 
-                /*. " <div class='dropdown'>
-                    <button class='dropbtn'>Choose your hero</button>
-                    <div class='dropdown-content'>
-                      <a href='#'>Link 1</a>
-                      <a href='#'>Link 2</a>
-                      <a href='#'>Link 3</a>
-                    </div>
-                    </div>"*/
-                . ""
-                . "</div>"
-                . "<p id='role' style='display:inline-block;';>Favorite Hero Role:</p><br>";
+                . " <form action=''>
+                  <select name='hero_select1' id='hero1'>
+                    <option value=''>-</option>
+                    <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
+                    <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
+                    <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
+                    <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                    <option value='Zeratul'>Zeratul</option>
+                  </select>
+                  <select name='hero_select2' id='hero2'>
+                    <option value=''>-</option>
+                    <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
+                    <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
+                    <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
+                    <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                  </select>
+                  <select name='hero_select3' id='hero3'>
+                    <option value=''>-</option>
+                    <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
+                    <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
+                    <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
+                    <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                  </select>
+                  <br>
+                  <input id='change' type='button' value='CHANGE' onclick='heroselect()'>
+                </form>"
+                . "<img id='holder1' src='hero_icons/$role.png' onerror='check(this)' alt='favorite hero' width='50' height='50' style='display:inline;'>"
+                . "<form action=''>
+                    
+                  <select name='role' id='role'>
+                    <option value=''>-</option>
+                    <option value='Specialist'>Specialist</option>
+                    <option value='Assassin'>Assassing</option>
+                    <option value='Warrior'>Warrior</option>
+                    <option value='Support'>Support</option>
+                  </select>"
+                . "<input id='change' type='button' value='CHANGE' onclick='roleselect()'>"
+                . "</div>";
+                //. "<p id='role' style='display:inline-block;';>Favorite Hero Role:</p><br>";
         echo "</div>";
         
     ?>
@@ -172,7 +193,7 @@ and open the template in the editor.
 
                 if (request.readyState === 4) {
                     console.log("I'm here in delete!");
-                    alert("Deletion complete!");
+                    //alert("Deletion complete!");
                     location.reload();
                 }
             };
@@ -186,7 +207,7 @@ and open the template in the editor.
             request.onreadystatechange = function() {
 
                 if (request.readyState === 4) {
-                    alert("Changes submitted");
+                    //alert("Changes submitted");
                     console.log("I'm here" + obj);
                     location.reload();
                 }
@@ -197,7 +218,113 @@ and open the template in the editor.
             request.send();
         }
         
-        function test(a)
+        function heroselect()
+        {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+
+                if (request.readyState === 4) {
+                    console.log("chane a hero!");
+                    location.reload();
+                }
+            };
+            var h1 = document.getElementById("hero1").value;
+            var h2 = document.getElementById("hero2").value;
+            var h3 = document.getElementById("hero3").value;
+            console.log("hero_select.php?h1="+h1+"&h2="+h2+"$h3="+h3);
+            request.open('get', 'hero_select.php?h1='+h1+"&h2="+h2+"&h3="+h3, true); //
+            request.send();
+        }
+        
+        function roleselect()
+        {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+
+                if (request.readyState === 4) {
+                    console.log("chane a role!");
+                    location.reload();
+                }
+            };
+            var r = document.getElementById("role").value;
+            console.log(r);
+            request.open('get', 'role_select.php?r='+r, true); //
+            request.send();
+        }
+        
+        function battlegroundselect()
+        {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+
+                if (request.readyState === 4) {
+                    console.log("chane a bg!");
+                    location.reload();
+                }
+            };
+            var b = document.getElementById("battleground").value;
+            console.log(b);
+            request.open('get', 'battleground_select.php?b='+b, true); //
+            request.send();
+        }
+        
+        function check(a){
+            var image = a;
+            if(image.src.match("hero_icons/.png")){ image.src = "hero_icons/heroframe.png"; }
+            else{  }
+        }
+       
+        
+    </script>
+    
+    <script>
+        <?php
+        
+            function checkurl()
+            {
+                if(!empty($_GET['name']))
+                { return true; }
+                else {return false;}
+            }
+
+            function checkusr()
+            {
+                //echo "I'm here!! <br>";
+                //echo $url = $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF']
+                if($_GET['name'])
+                {
+                    if($_GET['name'] === '')
+                    {
+                        return 'Unknown';
+                    }
+                    else { return $_GET['name']; }
+                }
+            }
+
+        ?>         
+    </script>
+        
+    <div id="footer"> Copyrights go to Ali Baokbah and University of Denver, CS Department. &copy </div>
+    </body>
+</html>
+
+
+
+<!--
+//. "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
+                /*. "<img id='holder1' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav1\",this)'>" //\"$fav1\"
+                . "<img id='holder2' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav2\",this)'>"
+                . "<img id='holder3' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav3\",this)'>"
+                */ // THIS IS A WORKING CODE!!!!
+                
+                /*. "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
+                . "<img id='holder1' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav1\",this) alt='favorite hero' width='50' height='50'>" //\"$fav1\"
+                . "<img id='holder2' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav2\",this) alt='favorite hero' width='50' height='50'>"
+                . "<img id='holder3' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav3\",this) alt='favorite hero' width='50' height='50'>"
+                    */
+
+
+function test(a)
         {
             var image = a;
             //var image = document.getElementById("holder1");
@@ -223,47 +350,9 @@ and open the template in the editor.
                 //alert("im here");
             }
         }
-        
-        function check(a){
-            
-            var image = a;
-            //alert(image.src);
-            if(image.src.match("hero_icons/.png")){ image.src = "hero_icons/heroframe.png"; }
-            else{  }
-        }
-       
-        
-    </script>
-    <script>
-        <?php
-        
-            function checkurl()
-            {
-                if(!empty($_GET['name']))
-                { return true; }
-                else {return false;}
-            }
 
-            function checkusr()
-            {
-                //echo "I'm here!! <br>";
-                //echo $url = $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF']
-                if($_GET['name'])
-                {
-                    if($_GET['name'] === '')
-                    {
-                        return 'Unknown';
-                    }
-                    else { return $_GET['name']; }
-                }
-            }
 
-        ?>
-    </script> 
-    
-    <script>
-            
-    function herro(a,b){
+function herro(a,b){
             var hero = a;
             var temp;
             if(hero == "") { return "hero_iconst/heroframe.png"; }
@@ -282,8 +371,4 @@ and open the template in the editor.
             //alert(a);
         }
     
-    </script>
-        
-    <div id="footer"> Copyrights go to Ali Baokbah and University of Denver, CS Department. &copy </div>
-    </body>
-</html>
+-->
