@@ -12,7 +12,7 @@ and open the template in the editor.
     <body>
         <?php
             include("connection.php");
-                $temp = filter_input(INPUT_GET, 'r');//hero_select1
+                $temp = filter_input(INPUT_GET, 'b');//hero_select1
                 
                 
                 if($_SERVER["REQUEST_METHOD"] == "GET")
@@ -24,9 +24,9 @@ and open the template in the editor.
                 
                 //echo"<script>console.log(".$temp1.");</script>";
                 
-                $sql = "UPDATE member SET role = '".$temp."'WHERE username='".$username."';";
+                $sql = "UPDATE member SET battleground = '".$temp."'WHERE username='".$username."';";
                 $result = mysql_query($sql);
-                header("location: profile.php");
+                //header("location: profile.php");
         ?>
     </body>
 </html>

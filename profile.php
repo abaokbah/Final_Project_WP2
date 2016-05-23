@@ -93,14 +93,29 @@ and open the template in the editor.
                     echo "<li> Gender: " . $row['gender'] . "</li>";
                     echo "<li> Role: " . $role . "</li>";
                     echo "<li> Favorite Battleground: <br><li>" . $row['battleground'] . "</li></li>";
-                    echo "<img id='holder1' src='hero_icons/SkyTemple.png' alt='favorite battleground' width='100' height='40'"
-                    . "style='position:relative; left:50px;'>";
+                    echo "<img id='holder1' src='hero_icons/" . $row['battleground'] . ".png' alt='favorite battleground' width='100' height='40'"
+                    . "style='position:relative; left:30px;'>";
                     //echo "<li> fav_hero2: " . $row['fav_hero2'] . "</li>";
                     echo "</tr>";
             }
         }
         
+        // Battleground options
+        echo "<form action='' style='display:inline; position:relative; left:40px; bottom:5px;'>
+                  <select name='battleground' id='battleground_select'>
+                    <option value=''>-</option>
+                    <option value='BattlefieldOfEternity'>Battlefield of Eternity</option>
+                    <option value='SkyTemple'>Sky Temple</option>
+                    <option value='DragonShire'>Dragon Shire</option>      
+                    <option value='TowersOfDoom'>Towers of Doom</option>
+                    <option value='CursedHollow'>Cursed Hollow</option>
+                  </select>
+                  <input id='change' type='button' value='CHANGE' onclick='battlegroundselect()'>
+                </form>";
+        
         echo "</div>";
+        
+        // Heroes options. Choose and click "CHANGE", which takes to a function down bottom.
         echo "<div id='hotsinfo' class='innerinfo' style='margin-left:50px;'>"
                 . "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
                 . "<img id='holder1' src='hero_icons/$fav1.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>" //\"$fav1\"
@@ -133,9 +148,12 @@ and open the template in the editor.
                   <br>
                   <input id='change' type='button' value='CHANGE' onclick='heroselect()'>
                 </form>"
+                //. "<p style='margin:0px';>Role Preference:</p>" // Work on this!!
+                . "<div id='rolee' style='position: relative; top:20px;'>"
                 . "<img id='holder1' src='hero_icons/$role.png' onerror='check(this)' alt='favorite hero' width='50' height='50' style='display:inline;'>"
+                
+                // Role options. also takes to a function down bottom.
                 . "<form action=''>
-                    
                   <select name='role' id='role'>
                     <option value=''>-</option>
                     <option value='Specialist'>Specialist</option>
@@ -144,7 +162,7 @@ and open the template in the editor.
                     <option value='Support'>Support</option>
                   </select>"
                 . "<input id='change' type='button' value='CHANGE' onclick='roleselect()'>"
-                . "</div>";
+                . "</div> </div>";
                 //. "<p id='role' style='display:inline-block;';>Favorite Hero Role:</p><br>";
         echo "</div>";
         
@@ -262,7 +280,7 @@ and open the template in the editor.
                     location.reload();
                 }
             };
-            var b = document.getElementById("battleground").value;
+            var b = document.getElementById("battleground_select").value;
             console.log(b);
             request.open('get', 'battleground_select.php?b='+b, true); //
             request.send();
