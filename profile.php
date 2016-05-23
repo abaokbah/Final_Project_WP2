@@ -93,7 +93,7 @@ and open the template in the editor.
                     echo "<li> Gender: " . $row['gender'] . "</li>";
                     echo "<li> Role: " . $role . "</li>";
                     echo "<li> Favorite Battleground: <br><li>" . $row['battleground'] . "</li></li>";
-                    echo "<img id='holder1' src='hero_icons/DragonShire.png' alt='favorite battleground' width='100' height='40'"
+                    echo "<img id='holder1' src='hero_icons/SkyTemple.png' alt='favorite battleground' width='100' height='40'"
                     . "style='position:relative; left:50px;'>";
                     //echo "<li> fav_hero2: " . $row['fav_hero2'] . "</li>";
                     echo "</tr>";
