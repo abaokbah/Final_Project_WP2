@@ -40,11 +40,13 @@ and open the template in the editor.
     <body>
         
         <audio controls autoplay loop>
-            <source src="hotsTheme.wav" type="audio/mpeg">
-            Your browser does not support the audio element.
+            <!--<source src="hotsTheme.wav" type="audio/mpeg">-- ENABLE WHEN DONE DEBUGGING!!!!-->
+            
         </audio>
         
-        <div id='welcome'>The Storm Colosseum</div>
+        
+    <center><img src='HOTS-Open-Beta-screen.png' alt='hots' style='width:96%;'></center>
+    <center><div id='welcome'>The Storm Colosseum</div></center>
         <form id = "indexform" name="loginform" action="login_exec.php" method="post">
             <table border="0" align="center" cellpadding="2" cellspacing="5">
             <tr>

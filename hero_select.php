@@ -11,6 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+                session_start();
                 include("connection.php");
                 $temp1 = filter_input(INPUT_GET, 'h1');//hero_select1
                 $temp2 = filter_input(INPUT_GET, 'h2');//hero_select2
@@ -33,9 +34,10 @@ and open the template in the editor.
                 
                 //echo"<script>console.log(".$temp1.");</script>";
                 
-                $sql = "UPDATE member SET fav_hero1 = '".$temp1."', fav_hero2 = '".$temp2."', fav_hero3 = '".$temp3."' WHERE username='".$username."';";
+                echo $_SESSION['SESS_FIRST_NAME'];
+                $sql = "UPDATE member SET fav_hero1 = '".$temp1."', fav_hero2 = '".$temp2."', fav_hero3 = '".$temp3."' WHERE username='".$_SESSION['SESS_FIRST_NAME']."';";
                 $result = mysql_query($sql);
-                header("location: profile.php");
+                //header("location: profile.php");
         ?>
     </body>
 </html>

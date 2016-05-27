@@ -6,8 +6,6 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<!-- I used a little bit of my PhotoStream assignment code in here -->
-
 <?php
     require_once('auth.php');
     if (!isset($_SESSION["pics"]))
@@ -65,11 +63,21 @@ and open the template in the editor.
         <div>
             <div>
                 <form id="myform" method="post" enctype="multipart/form-data">
-                    <center><h2>Welcome to Blue Skies Photo Sharing Website</h2></center>
+                    <center><h2>Welcome to the Hero Colosseum</h2></center>
                     <center>Add caption: <input type="text" name="caption"></center>
                     <center><input type="file" name="myfile" id="file">
                     <input type="button" id="upload" onclick="sendInfo();"  value="Upload"></center>
                 </form>
+                <!-- Blog form -->
+                <center><form id="myform2" method="post" enctype="multipart/form-data" style="margin:2px;">
+                    
+                    
+                    <h5 style="margin:2px;">Blog Title:<br> <input id="title" type="text" name="fTitle" size="40"></h5>
+                    <h5 style="margin:2px;">Blog Content:</h5>
+                
+                    <textarea name="fblog" id="blog" rows="30" cols="135" style="width:85%; height:150px;"></textarea>
+                <input name="Upload" type="button" id="Upload" onclick="sendPost();"  value="Post">
+                </form></center>
             </div>
          
             <br>
@@ -97,6 +105,27 @@ and open the template in the editor.
             </div>
     </div>
         
+    <div id="content">
+        <div id = 'display'>
+                <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
+                    $result = mysql_query("select * from abaokbah.fp_blog ORDER BY OrderDate");
+                   
+             
+                    while($row = mysql_fetch_array($result)) 
+                    {
+                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
+                                .$row['OrderDate'] ."</span></div>";// I changed date_time to OrderDate
+                        
+                        echo "<center><p>". $row['blog_title']. "</p></center>";
+                         echo "<center><p>". $row['blog']. "</p></center>";
+                        /////////////
+                        echo "<tr >";
+                    }
+                ?>
+            
+            </div>
+    </div>
         
         
     <script>
@@ -109,11 +138,27 @@ and open the template in the editor.
                         //var c = document.createElement("p");
                         p.innerHTML = request.responseText;
                         document.getElementById('display').appendChild(p);
-                        //location.reload();
+                        location.reload();
                     }
                 };
                 request.open('post', 'photovalidation.php', true);
                 var fd = new FormData(document.getElementById('myform'));
+                request.send(fd);
+            }
+            
+            function sendPost() {
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if (request.readyState === 4) {
+                        var p = document.createElement(p);
+                        //var c = document.createElement("p");
+                        p.innerHTML = request.responseText;
+                        document.getElementById('display').appendChild(p);
+                        location.reload();
+                    }
+                };
+                request.open('post', 'postvalidation.php', true);
+                var fd = new FormData(document.getElementById('myform2'));
                 request.send(fd);
             }
             

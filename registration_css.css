@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 26, 2016
+    Author     : alibaokbah
+*/
+
+body {
+    background: url("heroesback.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+#myform {    
+    position:relative;
+    top:50px;
+    //left:90px;
+    width:90%;
+    //background:gray;
+    background: url("arthas.jpg");
+    background-repeat: no-repeat;
+    color: white;
+    margin:auto;
+}
+
+#table{
+    position:relative;
+    //right:200px;
+    background:black;
+    margin:0px;
+}
+
+td {
+    font-family: monaco; font-weight: bold; 
+}
+
+h2 {
+    font-family: monaco;
+    color: whitesmoke; 
+    font-weight: bold;
+    position:relative;
+    top:20px;
+    background:black;
+    width:90%;
+}

@@ -37,7 +37,7 @@
             return mysql_real_escape_string($str);
             //return $str;
         }
-
+        
         //Sanitize the POST values
         $username = clean($_POST['username']);
         $password = clean($_POST['password']);

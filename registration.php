@@ -11,36 +11,13 @@ and open the template in the editor.
 <html>
     <head>
         <title>Registration</title>
-        <style>
-            
-            body {
-                background: url("blue_and_yellow_by_emina2492-d319f9w.jpg");
-                background-repeat: no-repeat;
-                width: 100%;
-                height: 100%;
-            }
-            
-            #myform {
-                margin-top: 50px;
-                //margin-left: 30px;
-                color: navy;
-            }
-            
-            td {
-                font-family: monaco; font-weight: bold; 
-            }
-            
-            h2 {
-                font-family: monaco; color: navy; font-weight: bold; margin-left: 25%; margin-top: 70px;
-            }
-            
-        </style>
+        <link rel="stylesheet" type="text/css" href="registration_css.css">
         
     </head>
     <body>
-        <h2>Welcome to Blue Skies Photo Sharing Website</h2>
-        <form id="myform" name="reg" action="insertmem.php" method="post">
-            <table width="274" border="0" align="center" cellpadding="2" cellspacing="0">
+    <center><h2>Welcome To The Hero Colosseum</h2></center>
+    <form id="myform" name="reg" action="insertmem.php" method="post">
+            <table id="table" width="274" border="0" align="center" cellpadding="2" cellspacing="0">
             <tr>
             <td colspan="2">
             <div align="center">
@@ -56,9 +33,10 @@ and open the template in the editor.
                 <td><input type="text" name="lname" /></td>
             </tr>
             <tr>
-                <td><div align="right">Gender:</div></td>
-                <td><input type="radio" name="gender" value="Male">Male
-                    <input type="radio" name="gender" value="Female">Female</td>
+                <td><div align="right">BATTLETAG#:</div></td>
+                <!--<td><input type="radio" name="gender" value="Male">Male
+                    <input type="radio" name="gender" value="Female">Female</td>-->
+                <td><input type="text" name="battletag" /></td>
             </tr>
             <!--
             <tr>

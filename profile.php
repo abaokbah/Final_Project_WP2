@@ -20,8 +20,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        //echo "<h1>Proflie page (Under construction)</h1>";
-        // put your code here
+            
         ?>
         
          <!-- Header section -->
@@ -53,18 +52,19 @@ and open the template in the editor.
         $greetings = $_SESSION['SESS_FIRST_NAME'];
         $keyholder = $_SESSION['SESS_FIRST_NAME'];
         
-        if(checkurl())
-        {
-            $greetings = "Guest";
-            $user = $_GET['name'];
-            $keyholder = "Guest";
-            echo "<h2> Welcome " . $greetings . ". You are checking ". $user. "'s profile</h2>";
+        if(filter_input(INPUT_GET, 'name') == NULL){
+            $temp = $user;
         }
-        else {echo "<h2> Welcome " . $greetings . ".</h2>";}
+        else{ $temp = filter_input(INPUT_GET, 'name'); }
         
-        $res = mysql_query("select * from abaokbah.member WHERE username='$user'");
-        $ress = mysql_query("select * from abaokbah.member WHERE username='$user'");
-        $fetcher = mysql_query("select fav_hero1,fav_hero2,fav_hero3,role from abaokbah.member WHERE username='$user'");
+        if(filter_input(INPUT_GET, 'name') == $_SESSION['SESS_FIRST_NAME']) {
+            $temp = $user;
+        }
+     
+        //$res = mysql_query("select * from abaokbah.member WHERE username='$user'");
+        $res = mysql_query("select * from abaokbah.member WHERE username='$temp'");
+        $ress = mysql_query("select * from abaokbah.member WHERE username='$temp'");
+        $fetcher = mysql_query("select fav_hero1,fav_hero2,fav_hero3,role from abaokbah.member WHERE username='$temp'");
         if($fetcher){
             while($f = mysql_fetch_array($ress))
             {
@@ -83,7 +83,7 @@ and open the template in the editor.
        echo "<br>";
       // echo "<p style=''>$user's " . "information: </p>";
        echo "<div class='innerinfo'>";
-       echo "<p style=''>$user's " . "information: </p>";
+       echo "<p style=''>$temp's " . "information: </p>";
         if($res){ 
                     while($row = mysql_fetch_array($res)) {
                     echo "<tr>";
@@ -93,7 +93,7 @@ and open the template in the editor.
                     echo "<li> Gender: " . $row['gender'] . "</li>";
                     echo "<li> Role: " . $role . "</li>";
                     echo "<li> Favorite Battleground: <br><li>" . $row['battleground'] . "</li></li>";
-                    echo "<img id='holder1' src='hero_icons/" . $row['battleground'] . ".png' alt='favorite battleground' width='100' height='40'"
+                    echo "<img id='holder1' src='hero_icons/battlegrounds/" . $row['battleground'] . ".png' alt='favorite battleground' width='100' height='40'"
                     . "style='position:relative; left:30px;'>";
                     //echo "<li> fav_hero2: " . $row['fav_hero2'] . "</li>";
                     echo "</tr>";
@@ -101,7 +101,7 @@ and open the template in the editor.
         }
         
         // Battleground options
-        echo "<form action='' style='display:inline; position:relative; left:40px; bottom:5px;'>
+        echo "<form id='bg' action='' style='display:inline; position:relative; left:40px; bottom:5px;'>
                   <select name='battleground' id='battleground_select'>
                     <option value=''>-</option>
                     <option value='BattlefieldOfEternity'>Battlefield of Eternity</option>
@@ -109,6 +109,10 @@ and open the template in the editor.
                     <option value='DragonShire'>Dragon Shire</option>      
                     <option value='TowersOfDoom'>Towers of Doom</option>
                     <option value='CursedHollow'>Cursed Hollow</option>
+                    <option value='BlackheartsBay'>Blackheart's Bay</option>
+                    <option value='TomboftheSpiderQueen'>Tomb of the Spider Queen</option>
+                    <option value='InfernalShrines'>Infernal Shrines</option>
+                    <option value='GardenofTerror'>Garden of Terror</option>
                   </select>
                   <input id='change' type='button' value='CHANGE' onclick='battlegroundselect()'>
                 </form>";
@@ -118,11 +122,11 @@ and open the template in the editor.
         // Heroes options. Choose and click "CHANGE", which takes to a function down bottom.
         echo "<div id='hotsinfo' class='innerinfo' style='margin-left:50px;'>"
                 . "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
-                . "<img id='holder1' src='hero_icons/$fav1.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>" //\"$fav1\"
-                . "<img id='holder2' src='hero_icons/$fav2.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
-                . "<img id='holder3' src='hero_icons/$fav3.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
+                . "<img id='holder1' src='hero_icons/heroes/$fav1.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>" //\"$fav1\"
+                . "<img id='holder2' src='hero_icons/heroes/$fav2.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
+                . "<img id='holder3' src='hero_icons/heroes/$fav3.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
                 
-                . " <form action=''>
+                . " <form id='hr' action=''>
                   <select name='hero_select1' id='hero1'>
                     <option value=''>-</option>
                     <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
@@ -137,6 +141,7 @@ and open the template in the editor.
                     <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
                     <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
                     <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                    <option value='Zeratul'>Zeratul</option>
                   </select>
                   <select name='hero_select3' id='hero3'>
                     <option value=''>-</option>
@@ -144,28 +149,53 @@ and open the template in the editor.
                     <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
                     <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
                     <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                    <option value='Zeratul'>Zeratul</option>
                   </select>
                   <br>
                   <input id='change' type='button' value='CHANGE' onclick='heroselect()'>
                 </form>"
                 //. "<p style='margin:0px';>Role Preference:</p>" // Work on this!!
                 . "<div id='rolee' style='position: relative; top:20px;'>"
-                . "<img id='holder1' src='hero_icons/$role.png' onerror='check(this)' alt='favorite hero' width='50' height='50' style='display:inline;'>"
+                . "<img id='holder1' src='hero_icons/roles/$role.png' onerror='check(this)' alt='favorite hero' width='50' height='50' style='display:inline;'>"
                 
                 // Role options. also takes to a function down bottom.
-                . "<form action=''>
+                . "<form id='rl' action=''>
                   <select name='role' id='role'>
                     <option value=''>-</option>
                     <option value='Specialist'>Specialist</option>
-                    <option value='Assassin'>Assassing</option>
+                    <option value='Assassin'>Assassin</option>
                     <option value='Warrior'>Warrior</option>
                     <option value='Support'>Support</option>
                   </select>"
-                . "<input id='change' type='button' value='CHANGE' onclick='roleselect()'>"
+                . "<input id='change' type='button' value='CHANGE' onclick='roleselect()'></form>"
                 . "</div> </div>";
                 //. "<p id='role' style='display:inline-block;';>Favorite Hero Role:</p><br>";
         echo "</div>";
         
+    ?>
+    
+    <script>
+        function hide(){
+            console.log("I'm in hide!!");
+            document.getElementById("bg").style.display = "none";
+            document.getElementById("hr").style.display = "none";
+            document.getElementById("rl").style.display = "none";
+            //document.getElementsByTagName("LI");
+        }
+    </script>
+    
+    <?php 
+        if(checkurl() && filter_input(INPUT_GET, 'name') != $_SESSION['SESS_FIRST_NAME'])
+        {
+            $greetings = "Guest";
+            $user = $_GET['name'];
+            $keyholder = "Guest";
+            echo "<h2> Welcome " . $greetings . ". You are checking ". $user. "'s profile</h2>";
+            echo "<script type='text/javascript'>hide();</script>";
+            //echo "<script type='text/javascript'>document.getElementByTagName('SELECT').style.display = 'none';</script>";
+        }
+        else {echo "<h2> Welcome " . $greetings . ".</h2>";}
+    
     ?>
     
     <form>
@@ -187,8 +217,8 @@ and open the template in the editor.
                     {
                         $row['picname'] = str_replace(' ', '', $row['picname']);
                         
-                        echo "<div><span id='picinfo'>Posted by:"
-                        .$row['membername']."</span>"."<span id='date'>Posted on: " 
+                        echo "<div><span id='picinfo'>Posted by: ". "<a href='profile.php?name="
+                        .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
                                 .$row['OrderDate'] ."</span></div>";
                         echo "<center><p>". $row['caption']. "</p></center>";
                         echo "<center><img src=./pics/" . $row['picname'] ."></center>";
@@ -196,6 +226,29 @@ and open the template in the editor.
                             $pc = $row['picname'];
                             echo "<center><input id='change' type='button' value='CHANGE CAPTION' onclick='changecap(\"$pc\")'></center>";
                             echo "<center><input id='delete' type='button' value='DELETE' onclick='deletepic(\"$pc\")'></center>";
+                        }
+                    }
+                }
+                
+                $result2 = mysql_query("select * from abaokbah.fp_blog WHERE memname='$user' ORDER BY blog_id DESC");
+                
+                if($result2){ //echo "I'm here!!";
+                    
+                    
+                    while($row = mysql_fetch_array($result2)) 
+                    {
+                        
+                        
+                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
+                                .$row['OrderDate'] ."</span></div>"; /// I changed date_time to OrderDate
+                        
+                        echo "<center><p>". $row['blog_title']. "</p></center>";
+                         echo "<center><p>". $row['blog']. "</p></center>";
+                        if($row['memname']===$keyholder){
+                            $pc = $row['blog_id'];
+                            echo "<center><input id='change' type='button' value='EDIT BLOG' onclick='editBlog(\"$pc\")'></center>";
+                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deleteBlog(\"$pc\")'></center>";
                         }
                     }
                 }
@@ -286,9 +339,48 @@ and open the template in the editor.
             request.send();
         }
         
+        
+        ////////////////////////////////////////////////////////////////////
+        
+        function deleteBlog(y)
+        {
+            var answer = confirm("Do you want to delete this blog?");
+           if (answer){
+            xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var answer = confirm("Successfully deleted");
+                                        setTimeout(function() {window.location = "profile.php" });
+                    }
+                }
+                xmlhttp.open("POST","deleteBlog.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send("y="+y);
+
+           }
+        }
+        function editBlog(y)
+        {
+            //var answer = confirm("Do you want to delete this gallery?");
+
+            xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("empty").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("POST","editBlog_helper.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send("y="+y);
+
+              setTimeout(function() {window.location = "editBlog.php" });
+
+        } 
+        
         function check(a){
             var image = a;
-            if(image.src.match("hero_icons/.png")){ image.src = "hero_icons/heroframe.png"; }
+            if(image.src.match("hero_icons/heroes/.png") || image.src.match("hero_icons/roles/.png"))
+            { image.src = "hero_icons/heroes/heroframe.png"; }
             else{  }
         }
        
@@ -318,6 +410,8 @@ and open the template in the editor.
                     else { return $_GET['name']; }
                 }
             }
+            
+            
 
         ?>         
     </script>

@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
         <?php
             include("connection.php");
+            session_start();
                 $temp = filter_input(INPUT_GET, 'r');//hero_select1
                 
                 
@@ -24,9 +25,9 @@ and open the template in the editor.
                 
                 //echo"<script>console.log(".$temp1.");</script>";
                 
-                $sql = "UPDATE member SET role = '".$temp."'WHERE username='".$username."';";
+                $sql = "UPDATE member SET role = '".$temp."'WHERE username='".$_SESSION['SESS_FIRST_NAME']."';";
                 $result = mysql_query($sql);
-                header("location: profile.php");
+                //header("location: profile.php");
         ?>
     </body>
 </html>
