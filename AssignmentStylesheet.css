@@ -21,12 +21,14 @@ html {
 div.innerinfo {
     position: relative;
     top:-14px;
+    left:30px;
     
 }
 
 div#hotsinfo.innerinfo {
     position: relative;
     top:-40px;
+    left:30px;
 }
 
 body {
@@ -138,6 +140,16 @@ li {
 
 #picinfo {
     margin-left: 15px;
+}
+
+#rank{
+    //margin-left: 100px;
+    margin-left: 15%;
+}
+
+#badge{
+    //margin-left: 100px;
+    margin-left: 15%;
 }
 
 #indexform {

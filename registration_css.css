@@ -18,7 +18,7 @@ body {
 #myform {    
     position:relative;
     top:50px;
-    //left:90px;
+    left:90px;
     width:90%;
     //background:gray;
     background: url("arthas.jpg");
@@ -47,3 +47,10 @@ h2 {
     background:black;
     width:90%;
 }
+
+/*#test{
+    display:inline;
+    background-color:black;
+    width:100px; 
+    height:200px;
+}*/

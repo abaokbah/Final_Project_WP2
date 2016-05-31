@@ -20,6 +20,12 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+            if(!isset($_SESSION['SESS_FIRST_NAME'])) { header("location: page_not_found.php"); }
+            $check = filter_input(INPUT_GET, 'name');
+            $sqql = mysql_query("SELECT * from member where username = '".$check."'");
+            
+            if(mysql_num_rows($sqql) > 0 || filter_input(INPUT_GET, 'name') == NULL){}
+                else { echo "herro prease"; header("location: page_not_found.php"); }
             
         ?>
         
@@ -129,26 +135,89 @@ and open the template in the editor.
                 . " <form id='hr' action=''>
                   <select name='hero_select1' id='hero1'>
                     <option value=''>-</option>
-                    <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
-                    <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
-                    <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
-                    <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                    <option value='Abathur'>Abathur</option>    <option value='Anubarak'>Anubarak</option>
+                    <option value='Artanis'>Artanis</option>    <option value='Arthas'>Arthas</option>
+                    <option value='Azmodan'>Azmodan</option>    <option value='Brightwing'>Brightwing</option>
+                    <option value='Chen'>Chen</option>          <option value='Cho'>Cho</option>
+                    <option value='Chromie'>Chromie</option>    <option value='Dehaka'>Dehaka</option>  
+                    <option value='Diablo'>Diablo</option>      <option value='ETC'>E.T.C</option>
+                    <option value='Falstad'>Falstad</option>    <option value='Gall'>Gall</option>
+                    <option value='Gazlowe'>Gazlowe</option>    <option value='Greymane'>Greymane</option>
+                    <option value='Illidan'>Illidan</option>    <option value='Jaina'>Jaina</option>
+                    <option value='Johanna'>Johanna</option>    <option value='Kaelthas'>Kaelthas</option>  
+                    <option value='Kerrigan'>Kerrigan</option>  <option value='Kharazim'>Kharazim</option>
+                    <option value='Leoric'>Leoric</option>      <option value='LiLi'>LiLi</option>
+                    <option value='LiMing'>LiMing</option>      <option value='LtMorales'>Lt. Morales</option>
+                    <option value='Lunara'>Lunara</option>      <option value='Malfurion'>Malfurion</option>
+                    <option value='Muradin'>Muradin</option>    <option value='Murky'>Murky</option>
+                    <option value='Nazeebo'>Nazeebo</option>    <option value='Nova'>Nova</option>
+                    <option value='Raynor'>Raynor</option>      <option value='Rehgar'>Rehgar</option>  
+                    <option value='Rexxar'>Rexxar</option>      <option value='SgtHammer'>SgtHammer</option>
+                    <option value='Sonya'>Sonya</option>        <option value='Stitches'>Stitches</option>
+                    <option value='Sylvanas'>Sylvanas</option>  <option value='Tassadar'>Tassadar</option>
+                    <option value='TheButcher'>The Butcher</option>      <option value='TheLostVikings'>The Lost Vikings</option>
+                    <option value='Thrall'>Thrall</option>      <option value='Tracer'>Tracer</option>
+                    <option value='Tychus'>Tychus</option>      <option value='Tyrande'>Tyrande</option>
+                    <option value='Uther'>Uther</option>        <option value='Valla'>Valla</option>
+                    <option value='Xul'>Xul</option>            <option value='Zagara'>Zagara</option>
                     <option value='Zeratul'>Zeratul</option>
                   </select>
                   <select name='hero_select2' id='hero2'>
                     <option value=''>-</option>
-                    <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
-                    <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
-                    <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
-                    <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                    <option value='Abathur'>Abathur</option>    <option value='Anubarak'>Anubarak</option>
+                    <option value='Artanis'>Artanis</option>    <option value='Arthas'>Arthas</option>
+                    <option value='Azmodan'>Azmodan</option>    <option value='Brightwing'>Brightwing</option>
+                    <option value='Chen'>Chen</option>          <option value='Cho'>Cho</option>
+                    <option value='Chromie'>Chromie</option>    <option value='Dehaka'>Dehaka</option>  
+                    <option value='Diablo'>Diablo</option>      <option value='ETC'>E.T.C</option>
+                    <option value='Falstad'>Falstad</option>    <option value='Gall'>Gall</option>
+                    <option value='Gazlowe'>Gazlowe</option>    <option value='Greymane'>Greymane</option>
+                    <option value='Illidan'>Illidan</option>    <option value='Jaina'>Jaina</option>
+                    <option value='Johanna'>Johanna</option>    <option value='Kaelthas'>Kaelthas</option>  
+                    <option value='Kerrigan'>Kerrigan</option>  <option value='Kharazim'>Kharazim</option>
+                    <option value='Leoric'>Leoric</option>      <option value='LiLi'>LiLi</option>
+                    <option value='LiMing'>LiMing</option>      <option value='LtMorales'>Lt. Morales</option>
+                    <option value='Lunara'>Lunara</option>      <option value='Malfurion'>Malfurion</option>
+                    <option value='Muradin'>Muradin</option>    <option value='Murky'>Murky</option>
+                    <option value='Nazeebo'>Nazeebo</option>    <option value='Nova'>Nova</option>
+                    <option value='Raynor'>Raynor</option>      <option value='Rehgar'>Rehgar</option>  
+                    <option value='Rexxar'>Rexxar</option>      <option value='SgtHammer'>SgtHammer</option>
+                    <option value='Sonya'>Sonya</option>        <option value='Stitches'>Stitches</option>
+                    <option value='Sylvanas'>Sylvanas</option>  <option value='Tassadar'>Tassadar</option>
+                    <option value='TheButcher'>The Butcher</option>      <option value='TheLostVikings'>The Lost Vikings</option>
+                    <option value='Thrall'>Thrall</option>      <option value='Tracer'>Tracer</option>
+                    <option value='Tychus'>Tychus</option>      <option value='Tyrande'>Tyrande</option>
+                    <option value='Uther'>Uther</option>        <option value='Valla'>Valla</option>
+                    <option value='Xul'>Xul</option>            <option value='Zagara'>Zagara</option>
                     <option value='Zeratul'>Zeratul</option>
                   </select>
                   <select name='hero_select3' id='hero3'>
                     <option value=''>-</option>
-                    <option value='Tassadar'>Tassadar</option>  <option value='Artanis'>Artanis</option>
-                    <option value='Lunara'>Lunara</option>      <option value='Murky'>Murky</option>
-                    <option value='Kaelthas'>Kaelthas</option>  <option value='Nazeebo'>Nazeebo</option>
-                    <option value='Chen'>Chen</option>          <option value='Rexxar'>Rexxar</option>
+                    <option value='Abathur'>Abathur</option>    <option value='Anubarak'>Anubarak</option>
+                    <option value='Artanis'>Artanis</option>    <option value='Arthas'>Arthas</option>
+                    <option value='Azmodan'>Azmodan</option>    <option value='Brightwing'>Brightwing</option>
+                    <option value='Chen'>Chen</option>          <option value='Cho'>Cho</option>
+                    <option value='Chromie'>Chromie</option>    <option value='Dehaka'>Dehaka</option>  
+                    <option value='Diablo'>Diablo</option>      <option value='ETC'>E.T.C</option>
+                    <option value='Falstad'>Falstad</option>    <option value='Gall'>Gall</option>
+                    <option value='Gazlowe'>Gazlowe</option>    <option value='Greymane'>Greymane</option>
+                    <option value='Illidan'>Illidan</option>    <option value='Jaina'>Jaina</option>
+                    <option value='Johanna'>Johanna</option>    <option value='Kaelthas'>Kaelthas</option>  
+                    <option value='Kerrigan'>Kerrigan</option>  <option value='Kharazim'>Kharazim</option>
+                    <option value='Leoric'>Leoric</option>      <option value='LiLi'>LiLi</option>
+                    <option value='LiMing'>LiMing</option>      <option value='LtMorales'>Lt. Morales</option>
+                    <option value='Lunara'>Lunara</option>      <option value='Malfurion'>Malfurion</option>
+                    <option value='Muradin'>Muradin</option>    <option value='Murky'>Murky</option>
+                    <option value='Nazeebo'>Nazeebo</option>    <option value='Nova'>Nova</option>
+                    <option value='Raynor'>Raynor</option>      <option value='Rehgar'>Rehgar</option>  
+                    <option value='Rexxar'>Rexxar</option>      <option value='SgtHammer'>SgtHammer</option>
+                    <option value='Sonya'>Sonya</option>        <option value='Stitches'>Stitches</option>
+                    <option value='Sylvanas'>Sylvanas</option>  <option value='Tassadar'>Tassadar</option>
+                    <option value='TheButcher'>The Butcher</option>      <option value='TheLostVikings'>The Lost Vikings</option>
+                    <option value='Thrall'>Thrall</option>      <option value='Tracer'>Tracer</option>
+                    <option value='Tychus'>Tychus</option>      <option value='Tyrande'>Tyrande</option>
+                    <option value='Uther'>Uther</option>        <option value='Valla'>Valla</option>
+                    <option value='Xul'>Xul</option>            <option value='Zagara'>Zagara</option>
                     <option value='Zeratul'>Zeratul</option>
                   </select>
                   <br>
@@ -205,56 +274,61 @@ and open the template in the editor.
     
     <div id="content">
         <div id = 'display'>
-                <?php
-                $result = mysql_query("select * from abaokbah.mempics WHERE membername='$user' ORDER BY PID DESC");
+                <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
+                    //$result = mysql_query("select * from abaokbah.mempics ORDER BY PID DESC");
+                $pic = false;
+                $result = mysql_query("SELECT OrderDate, membername FROM mempics UNION SELECT OrderDate, memname FROM fp_blog ORDER BY OrderDate DESC");
                 
-                if($result){ //echo "I'm here!!";
-                    
-                    echo "<center>"
-                    . "<input type='text' name='capchange' id='capchange'></center>"
-                            . "<center><p> Enter a new caption and scroll down to modify desired picture</p></center>";
                     while($row = mysql_fetch_array($result)) 
                     {
-                        $row['picname'] = str_replace(' ', '', $row['picname']);
+                        $temp_blog = mysql_query("SELECT * from abaokbah.fp_blog where OrderDate = '".$row['OrderDate']."' and memname = "
+                                . "'$user'");
+                        $temp_pic = mysql_query("SELECT * from abaokbah.mempics where OrderDate = '".$row['OrderDate']."' and membername = "
+                                . "'$user'");
+                        $temp_user = mysql_query("SELECT rank,badge from abaokbah.member where username= '".$row['membername']."'");
+                        $val = mysql_result($temp_user, 0, 'rank');
+                        $bdg = mysql_result($temp_user, 0, 'badge');
                         
-                        echo "<div><span id='picinfo'>Posted by: ". "<a href='profile.php?name="
-                        .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
-                                .$row['OrderDate'] ."</span></div>";
-                        echo "<center><p>". $row['caption']. "</p></center>";
-                        echo "<center><img src=./pics/" . $row['picname'] ."></center>";
-                        if($row['membername']===$keyholder){
-                            $pc = $row['picname'];
-                            echo "<center><input id='change' type='button' value='CHANGE CAPTION' onclick='changecap(\"$pc\")'></center>";
-                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deletepic(\"$pc\")'></center>";
+                        if($temp_blog){
+                         while($roww = mysql_fetch_array($temp_blog)) 
+                         {
+                             echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                                .$roww['memname']."'> ".$roww['memname']."</a></span>"
+                                     ."<span id='rank'>Rank: " .$val ."</span>"
+                                     ."<span id='badge'>Badge: " .$bdg ."</span>"
+                                     ."<span id='date'>Posted on: " 
+                                .$roww['OrderDate'] ."</span></div>";// I changed date_time to OrderDate
+                                echo "<center><p>". $roww['blog_title']. "</p></center>";
+                                echo "<center><p>". $roww['blog']. "</p></center>";
+                                echo "<tr >";
+                                
+                         }
                         }
-                    }
-                }
-                
-                $result2 = mysql_query("select * from abaokbah.fp_blog WHERE memname='$user' ORDER BY blog_id DESC");
-                
-                if($result2){ //echo "I'm here!!";
-                    
-                    
-                    while($row = mysql_fetch_array($result2)) 
-                    {
                         
-                        
-                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
-                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
-                                .$row['OrderDate'] ."</span></div>"; /// I changed date_time to OrderDate
-                        
-                        echo "<center><p>". $row['blog_title']. "</p></center>";
-                         echo "<center><p>". $row['blog']. "</p></center>";
-                        if($row['memname']===$keyholder){
-                            $pc = $row['blog_id'];
-                            echo "<center><input id='change' type='button' value='EDIT BLOG' onclick='editBlog(\"$pc\")'></center>";
-                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deleteBlog(\"$pc\")'></center>";
+                        if($temp_pic){
+                         while($roww = mysql_fetch_array($temp_pic)) 
+                         {
+                             $roww['picname'] = str_replace(' ', '', $roww['picname']);
+                                echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                                .$roww['membername']."'> ".$roww['membername']."</a></span>"
+                                        ."<span id='rank'>Rank: " .$val ."</span>"
+                                        ."<span id='badge'>Badge: " .$bdg ."</span>"
+                                        ."<span id='date'>Posted on: " 
+                                        .$roww['OrderDate'] ."</span></div>";
+
+                                echo "<center><p>". $roww['caption']. "</p></center>";
+                                echo "<center><img src=./pics/" . $roww['picname'] ."></center>";
+                         }
                         }
+                        
                     }
-                }
                 ?>
+            
             </div>
     </div>
+    
+    
+    
     
     <script>
         function deletepic(a)
@@ -416,7 +490,7 @@ and open the template in the editor.
         ?>         
     </script>
         
-    <div id="footer"> Copyrights go to Ali Baokbah and University of Denver, CS Department. &copy </div>
+    <div id="footer"> Copyrights go to Ali Baokbah, Mansour Malaika and University of Denver, CS Department. &copy </div>
     </body>
 </html>
 
@@ -483,4 +557,54 @@ function herro(a,b){
             //alert(a);
         }
     
--->
+--
+
+
+<div id="content">
+        <div id = 'display'>
+                <?php
+                /*$result = mysql_query("select * from abaokbah.mempics WHERE membername='$user' ORDER BY PID DESC");
+                
+                if($result){ //echo "I'm here!!";
+                    
+                    echo "<center>"
+                    . "<input type='text' name='capchange' id='capchange'></center>"
+                            . "<center><p> Enter a new caption and scroll down to modify desired picture</p></center>";
+                    while($row = mysql_fetch_array($result)) 
+                    {
+                        $row['picname'] = str_replace(' ', '', $row['picname']);
+                        
+                        echo "<div><span id='picinfo'>Posted by: ". "<a href='profile.php?name="
+                        .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
+                                .$row['OrderDate'] ."</span></div>";
+                        echo "<center><p>". $row['caption']. "</p></center>";
+                        echo "<center><img src=./pics/" . $row['picname'] ."></center>";
+                        if($row['membername']===$keyholder){
+                            $pc = $row['picname'];
+                            echo "<center><input id='change' type='button' value='CHANGE CAPTION' onclick='changecap(\"$pc\")'></center>";
+                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deletepic(\"$pc\")'></center>";
+                        }
+                    }
+                }
+                
+                $result2 = mysql_query("select * from abaokbah.fp_blog WHERE memname='$user' ORDER BY blog_id DESC");
+                
+                if($result2){ //echo "I'm here!!";
+                    while($row = mysql_fetch_array($result2)) 
+                    {
+                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
+                                .$row['OrderDate'] ."</span></div>"; /// I changed date_time to OrderDate
+                        
+                        echo "<center><p>". $row['blog_title']. "</p></center>";
+                         echo "<center><p>". $row['blog']. "</p></center>";
+                        if($row['memname']===$keyholder){
+                            $pc = $row['blog_id'];
+                            echo "<center><input id='change' type='button' value='EDIT BLOG' onclick='editBlog(\"$pc\")'></center>";
+                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deleteBlog(\"$pc\")'></center>";
+                        }
+                    }
+                }*/
+                ?>
+            </div>
+    </div>-->

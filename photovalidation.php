@@ -42,6 +42,7 @@
             
             mysql_query("INSERT INTO abaokbah.mempics(membername, picname, caption)"
                     ."VALUES('$user', '$pic', '$cap')");
+            mysql_query("UPDATE member SET member.rank = member.rank + 1 where username ='".$_SESSION['SESS_FIRST_NAME']."';");
         }
     } else {
         echo "<br>";

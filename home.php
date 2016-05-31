@@ -83,51 +83,71 @@ and open the template in the editor.
             <br>
         </div>
     
-    
-    
     <div id="content">
         <div id = 'display'>
                 <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
-                    $result = mysql_query("select * from abaokbah.mempics ORDER BY PID DESC");
+                    //$result = mysql_query("select * from abaokbah.mempics ORDER BY PID DESC");
+                $pic = false;
+                $result = mysql_query("SELECT OrderDate, membername FROM mempics UNION SELECT OrderDate, memname FROM fp_blog ORDER BY OrderDate DESC");
+                $yes = true;
                     while($row = mysql_fetch_array($result)) 
                     {
-                        $row['picname'] = str_replace(' ', '', $row['picname']);
-                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
-                        .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
-                                .$row['OrderDate'] ."</span></div>";
+                        $temp_blog = mysql_query("SELECT * from abaokbah.fp_blog where OrderDate = '".$row['OrderDate']."'");
+                        $temp_pic = mysql_query("SELECT * from abaokbah.mempics where OrderDate = '".$row['OrderDate']."'");
+                        $temp_user = mysql_query("SELECT rank,badge from abaokbah.member where username= '".$row['membername']."'");
+                        $val = mysql_result($temp_user, 0, 'rank');
+                        $bdg = mysql_result($temp_user, 0, 'badge');
+                        if($val % 5 == 0){
+                            if($yes){
+                                 mysql_query("UPDATE member set member.badge = concat(member.badge,'*') where username = '".$_SESSION['SESS_FIRST_NAME']."';");
+                                 $yes = false;
+                                 mysql_query("UPDATE member SET member.rank = member.rank + 1 where username ='".$_SESSION['SESS_FIRST_NAME']."';");
+                            }
+                        }
+                             
+                        if($temp_blog){
+                         while($roww = mysql_fetch_array($temp_blog)) 
+                         {
+                             //if($yes){ $bdg.='*'; $yes=false; } else {}
+                             echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                                .$roww['memname']."'> ".$roww['memname']."</a></span>"
+                                     ."<span id='rank'>Rank: " .$val ."</span>"
+                                     ."<span id='badge'>Badge: " .$bdg ."</span>"
+                                     ."<span id='date'>Posted on: " 
+                                .$roww['OrderDate'] ."</span></div>";// I changed date_time to OrderDate
+                                echo "<center><p>". $roww['blog_title']. "</p></center>";
+                                echo "<center><p>". $roww['blog']. "</p></center>";
+                                echo "<tr >";
+                                
+                         }
+                        }
                         
-                        echo "<center><p>". $row['caption']. "</p></center>";
-                        echo "<center><img src=./pics/" . $row['picname'] ."></center>";
+                        if($temp_pic)
+                        {
+                         while($roww = mysql_fetch_array($temp_pic)) 
+                         {  
+                            /*if($val % 5 == 0){
+                                 mysql_query("UPDATE member set member.badge = concat(member.badge,'*') where username = '".$_SESSION['SESS_FIRST_NAME']."';");
+                             }*/
+                             $roww['picname'] = str_replace(' ', '', $roww['picname']);
+                                echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                                .$roww['membername']."'> ".$roww['membername']."</a></span>"
+                                        ."<span id='rank'>Rank: " .$val ."</span>"
+                                        ."<span id='badge'>Badge: " .$bdg ."</span>"
+                                        ."<span id='date'>Posted on: " 
+                                        .$roww['OrderDate'] ."</span></div>";
+
+                                echo "<center><p>". $roww['caption']. "</p></center>";
+                                echo "<center><img src=./pics/" . $roww['picname'] ."></center>";
+                        }}
+
 
                     }
                 ?>
             
             </div>
     </div>
-        
-    <div id="content">
-        <div id = 'display'>
-                <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
-                    $result = mysql_query("select * from abaokbah.fp_blog ORDER BY OrderDate");
-                   
-             
-                    while($row = mysql_fetch_array($result)) 
-                    {
-                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
-                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
-                                .$row['OrderDate'] ."</span></div>";// I changed date_time to OrderDate
-                        
-                        echo "<center><p>". $row['blog_title']. "</p></center>";
-                         echo "<center><p>". $row['blog']. "</p></center>";
-                        /////////////
-                        echo "<tr >";
-                    }
-                ?>
-            
-            </div>
-    </div>
-        
-        
+      
     <script>
             function sendInfo() {
                 var request = new XMLHttpRequest();
@@ -167,7 +187,53 @@ and open the template in the editor.
                 location.reload();
             }
         </script>
-        
-        <div id="footer"> Copyrights go to Ali Baokbah and University of Denver, CS Department. &copy </div>
+        <?php if(!$yes) { echo "<script>refresh();</script>"; } ?>
+        <div id="footer"> Copyrights go to Ali Baokbah, Mansour Malaika and University of Denver, CS Department. &copy </div>
     </body>
 </html>
+
+
+
+
+
+<!--<div id="content">
+        <div id = 'display'>
+                <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
+                    /*$result = mysql_query("select * from abaokbah.mempics ORDER BY PID DESC");
+                    while($row = mysql_fetch_array($result)) 
+                    {
+                        $row['picname'] = str_replace(' ', '', $row['picname']);
+                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                        .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
+                                .$row['OrderDate'] ."</span></div>";
+                        
+                        echo "<center><p>". $row['caption']. "</p></center>";
+                        echo "<center><img src=./pics/" . $row['picname'] ."></center>";
+
+                    }*/
+                ?>
+            
+            </div>
+    </div>
+        
+    <div id="content">
+        <div id = 'display'>
+                <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
+                    /*$result = mysql_query("select * from abaokbah.fp_blog ORDER BY OrderDate");
+                   
+             
+                    while($row = mysql_fetch_array($result)) 
+                    {
+                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
+                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
+                                .$row['OrderDate'] ."</span></div>";// I changed date_time to OrderDate
+                        
+                        echo "<center><p>". $row['blog_title']. "</p></center>";
+                         echo "<center><p>". $row['blog']. "</p></center>";
+                        /////////////
+                        echo "<tr >";
+                    }*/
+                ?>
+            
+            </div>
+    </div>-->

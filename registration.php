@@ -14,8 +14,18 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="registration_css.css">
         
     </head>
+    <center><h2 style='margin:0px'>Welcome To The Hero Colosseum</h2></center>
+    <table class="upperBanner">
+            <a href="home.php">
+                <center><img id="upbanner" src=" HOTS-Open-Beta-screen.png" alt="heroes background"
+                            width="90%" height="100%"> <!-- yellow-and-blue_00435238.jpg -->
+                </center></a>
+        </table> 
+    
     <body>
-    <center><h2>Welcome To The Hero Colosseum</h2></center>
+    <div id="test">
+            
+        </div>
     <form id="myform" name="reg" action="insertmem.php" method="post">
             <table id="table" width="274" border="0" align="center" cellpadding="2" cellspacing="0">
             <tr>
@@ -33,10 +43,10 @@ and open the template in the editor.
                 <td><input type="text" name="lname" /></td>
             </tr>
             <tr>
-                <td><div align="right">BATTLETAG#:</div></td>
-                <!--<td><input type="radio" name="gender" value="Male">Male
-                    <input type="radio" name="gender" value="Female">Female</td>-->
-                <td><input type="text" name="battletag" /></td>
+                <!--<td><div align="right">BATTLETAG#:</div></td>-->
+                <td><center><input type="radio" name="gender" value="Male">Male</center></td>
+            <td><input type="radio" name="gender" value="Female">Female</td>
+                <!--<td><input type="text" name="battletag" /></td>-->
             </tr>
             <!--
             <tr>
@@ -58,6 +68,8 @@ and open the template in the editor.
             </table>
             
         </form>
+        
+        
         
         
         <script>

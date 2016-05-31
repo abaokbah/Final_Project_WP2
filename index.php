@@ -40,7 +40,7 @@ and open the template in the editor.
     <body>
         
         <audio controls autoplay loop>
-            <!--<source src="hotsTheme.wav" type="audio/mpeg">-- ENABLE WHEN DONE DEBUGGING!!!!-->
+            <source src="hotsTheme.wav" type="audio/mpeg"><!-- ENABLE WHEN DONE DEBUGGING!!!!-->
             
         </audio>
         

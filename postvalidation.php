@@ -25,6 +25,7 @@ and open the template in the editor.
                          $sq = "INSERT INTO abaokbah.fp_blog (blog, blog_title, memname) "
                                  . "VALUES ('$blog', '$title', '$user')";
                          $final_result = mysql_query($sq); 
+                         mysql_query("UPDATE member SET member.rank = member.rank + 1 where username ='".$_SESSION['SESS_FIRST_NAME']."';");
                     mysql_close($con);
             }
         ?>
