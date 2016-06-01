@@ -10,17 +10,25 @@ and open the template in the editor.
 
 <html>
     <head>
-        <title>Registration</title>
+        <title>The Colosseum | Registration</title>
         <link rel="stylesheet" type="text/css" href="registration_css.css">
         
     </head>
+    <body>
+        
     <center><h2 style='margin:0px'>Welcome To The Hero Colosseum</h2></center>
     <table class="upperBanner">
             <a href="home.php">
                 <center><img id="upbanner" src=" HOTS-Open-Beta-screen.png" alt="heroes background"
-                            width="90%" height="100%"> <!-- yellow-and-blue_00435238.jpg -->
+                            width="90%" height="100%">
                 </center></a>
         </table> 
+    
+    <table id="menutable">
+            <tr>
+                <td><a id="home" href="home.php">HOME</a></td>
+            </tr>
+        </table>
     
     <body>
     <div id="test">
@@ -48,11 +56,7 @@ and open the template in the editor.
             <td><input type="radio" name="gender" value="Female">Female</td>
                 <!--<td><input type="text" name="battletag" /></td>-->
             </tr>
-            <!--
-            <tr>
-                <td><div align="right">Picture:</div></td>
-                <td><input type="text" name="pic" /></td>
-            </tr>-->
+            
             <tr>
                 <td><div align="right">Username:</div></td>
                 <td><input type="text" name="username" /></td>
@@ -69,13 +73,14 @@ and open the template in the editor.
             
         </form>
         
-        
-        
+        <br><br><br>
+        <div id="footer"> Copyrights go to Ali Baokbah, Mansour Malaika and University of Denver, CS Department. &copy </div>
         
         <script>
         
         function validateData()
-        {//console.log("I'm here!!");
+        {
+            //console.log("I'm here!!");
             var obj = document.getElementById("myform");
             var a=document.forms["reg"]["fname"].value;
             var b=document.forms["reg"]["lname"].value;
@@ -133,5 +138,6 @@ and open the template in the editor.
         }
         
         </script>
+        
     </body>
 </html>

@@ -4,22 +4,79 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
-
-
 <?php 
     session_start();
     include("connection.php");
 ?>
 
-<html>
+<html id='html'>
     <head>
         <meta charset="UTF-8">
-        <title>Profile</title>
+        <title>The Colosseum | Profile</title>
         <link rel="stylesheet" type="text/css" href="AssignmentStylesheet.css">
     </head>
-    <body>
+    <body id='body'>
+        
+        
+        
+        <script>
+        
+        function validateForm() {
+	//alert("sdasda");
+            var msg = '';
+            msg+=validateEntries();
+
+
+            if(msg.length>2)
+            {
+
+                alert(msg);
+                <?php $thrall = "false";?>
+                return false;
+            }
+           //return false;
+           else
+           {
+               <?php $thrall = "true";?>
+               return true;
+           }
+        }
+        function validateEntries() {
+            var msg = '';
+            var x = document.forms["entries_form"]["num_entries2"].value;
+            var re = /^[0-9]*$/;
+            if (x==null || x=="" || !(x.match(re))) {
+               // document.getElementById('first').style.borderColor = "red";
+                document.getElementById('num_entries2').style.border = "2px solid red";
+                //document.getElementById('first').style.backgroundColor = "red";
+                msg ="Input must be a number \n";
+                //alert("First name must be filled out");
+                return msg;
+            }
+            else
+            {
+                document.getElementById('num_entries2').style.border = "0px";
+            }
+            return msg;
+        }
+        
+        </script>
+        
+        
+        
         <?php
+        if(isset($_SESSION['col'])||isset($_SESSION['col2']))   
+        {
+            $color = $_SESSION['col'];
+            $color2 = $_SESSION['col2'];
+           echo "<script type='text/javascript'>document.getElementById('html').style.backgroundColor =\" ".$color."\"</script> ";
+	    echo "<script type='text/javascript'>document.getElementById('html').style.color =\" ".$color2."\"</script> ";
+            echo "<script type='text/javascript'>document.getElementById('body').style.backgroundColor =\" ".$color."\"</script> ";
+	    echo "<script type='text/javascript'>document.getElementById('body').style.color =\" ".$color2."\"</script> ";
+            //echo "<script type='text/javascript'>document.getElementsByTagName('html')[0].style.backgroundColor =\" ".$color."\"</script> ";
+	    //echo "<script type='text/javascript'>document.getElementById('info').style.color =\" ".$color2."\"</script> ";
+            echo "<script type='text/javascript'>col('$color2');</script>";
+        }
             if(!isset($_SESSION['SESS_FIRST_NAME'])) { header("location: page_not_found.php"); }
             $check = filter_input(INPUT_GET, 'name');
             $sqql = mysql_query("SELECT * from member where username = '".$check."'");
@@ -41,9 +98,12 @@ and open the template in the editor.
             <tr>
                 <td><a id="home" href="home.php">HOME</a></td>
                 <td><a id="profile" href="profile.php">PROFILE</a></td>
+                <td><a id="about" href="about.php">ABOUT</a></td>
                 <td><a id="upcoming" href="index.php">LOGOUT</a></td>
             </tr>
         </table>
+        
+        
     <!-- Styling pillars section section -->
     <span id="rightpillar">
         
@@ -110,15 +170,15 @@ and open the template in the editor.
         echo "<form id='bg' action='' style='display:inline; position:relative; left:40px; bottom:5px;'>
                   <select name='battleground' id='battleground_select'>
                     <option value=''>-</option>
-                    <option value='BattlefieldOfEternity'>Battlefield of Eternity</option>
-                    <option value='SkyTemple'>Sky Temple</option>
-                    <option value='DragonShire'>Dragon Shire</option>      
-                    <option value='TowersOfDoom'>Towers of Doom</option>
-                    <option value='CursedHollow'>Cursed Hollow</option>
-                    <option value='BlackheartsBay'>Blackheart's Bay</option>
-                    <option value='TomboftheSpiderQueen'>Tomb of the Spider Queen</option>
-                    <option value='InfernalShrines'>Infernal Shrines</option>
-                    <option value='GardenofTerror'>Garden of Terror</option>
+                    <option value='Battlefield of Eternity'>Battlefield of Eternity</option>
+                    <option value='Sky Temple'>Sky Temple</option>
+                    <option value='Dragon Shire'>Dragon Shire</option>      
+                    <option value='Towers of Doom'>Towers of Doom</option>
+                    <option value='Cursed Hollow'>Cursed Hollow</option>
+                    <option value='Blackhearts Bay'>Blackheart's Bay</option>
+                    <option value='Tomb of the Spider Queen'>Tomb of the Spider Queen</option>
+                    <option value='Infernal Shrines'>Infernal Shrines</option>
+                    <option value='Garden of Terror'>Garden of Terror</option>
                   </select>
                   <input id='change' type='button' value='CHANGE' onclick='battlegroundselect()'>
                 </form>";
@@ -127,7 +187,7 @@ and open the template in the editor.
         
         // Heroes options. Choose and click "CHANGE", which takes to a function down bottom.
         echo "<div id='hotsinfo' class='innerinfo' style='margin-left:50px;'>"
-                . "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
+                . "<p id='i' style='margin-left:1px';>Heroes Preferences:</p><br>"
                 . "<img id='holder1' src='hero_icons/heroes/$fav1.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>" //\"$fav1\"
                 . "<img id='holder2' src='hero_icons/heroes/$fav2.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
                 . "<img id='holder3' src='hero_icons/heroes/$fav3.png' onerror='check(this)' alt='favorite hero' width='50' height='50'>"
@@ -251,6 +311,26 @@ and open the template in the editor.
             document.getElementById("rl").style.display = "none";
             //document.getElementsByTagName("LI");
         }
+        
+        function col(a){
+            var foo = document.getElementsByTagName('li');
+            var foo2 = document.getElementsByTagName('p');
+            var foo3 = document.getElementsByTagName('div');
+            var foo4 = document.getElementsByTagName('span');
+            for(i=0;i<foo.length;i++){
+                foo[i].style.color=a;
+            }
+            for(i=0;i<foo2.length;i++){
+                foo2[i].style.color=a;
+            }
+            for(i=0;i<foo3.length;i++){
+                foo3[i].style.color=a;
+            }
+            for(i=0;i<foo4.length;i++){
+                foo4[i].style.color=a;
+            }
+        }
+        
     </script>
     
     <?php 
@@ -267,15 +347,54 @@ and open the template in the editor.
     
     ?>
     
-    <form>
-        
-        
-    </form>
+    <form name="entries_form" id="entries_form" action="home.php" method="POST" onsubmit=" return validateForm();">
+		 <h7> Choose number of entries: </h7>
+            <input type="text" id="num_entries2" name="num_entries" value="10">
+            <br>
+            <input id="submit" name="submit" type="submit"> 
+        </form>
     
     <div id="content">
         <div id = 'display'>
                 <?php // actual url is: http://webbox.cs.du.edu/~abaokbah/FinalProject/profile.php?name=
                     //$result = mysql_query("select * from abaokbah.mempics ORDER BY PID DESC");
+                
+                 if($thrall=="true" && isset($_POST["submit"]))
+		{
+                    
+			$num=$_POST["num_entries2"];
+			$_SESSION["num2"]=$num;
+                 
+                        $thrall = 'false';
+                   
+		}
+		else{
+			if(isset($_SESSION["num2"]))
+			{
+				$num=$_SESSION["num2"];
+			}
+			else{
+				$num=10;
+			}
+			
+		}
+                if(isset($_GET["page"]))
+                {
+		  $page=$_GET["page"];
+       	        }
+		else{
+                   $page="1";
+		}
+			  
+		if($page=="" || $page=="1")
+		{
+                    $page1=0;
+		}
+		else{
+		     $page1=($page*$num)-$num;
+		}
+                
+                
                 $pic = false;
                 $result = mysql_query("SELECT OrderDate, membername FROM mempics UNION SELECT OrderDate, memname FROM fp_blog ORDER BY OrderDate DESC");
                 
@@ -299,8 +418,13 @@ and open the template in the editor.
                                      ."<span id='date'>Posted on: " 
                                 .$roww['OrderDate'] ."</span></div>";// I changed date_time to OrderDate
                                 echo "<center><p>". $roww['blog_title']. "</p></center>";
-                                echo "<center><p>". $roww['blog']. "</p></center>";
+                                echo "<center><p id='blogg'>". $roww['blog']. "</p></center>";
                                 echo "<tr >";
+                                if($roww['memname']===$keyholder){
+                            $pc = $roww['blog_id'];
+                            echo "<center><input id='change' type='button' value='EDIT BLOG' onclick='editBlog(\"$pc\")'></center>";
+                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deleteBlog(\"$pc\")'></center>";
+                        }
                                 
                          }
                         }
@@ -318,10 +442,41 @@ and open the template in the editor.
 
                                 echo "<center><p>". $roww['caption']. "</p></center>";
                                 echo "<center><img src=./pics/" . $roww['picname'] ."></center>";
+                                if($roww['membername']===$keyholder){
+                            $pc = $roww['picname'];
+                            echo "<center><input id='change' type='button' value='CHANGE CAPTION' onclick='changecap(\"$pc\")'></center>";
+                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deletepic(\"$pc\")'></center>";
+                        }
                          }
                         }
                         
                     }
+                    
+                    $sql22 = "SELECT OrderDate FROM mempics UNION SELECT OrderDate FROM fp_blog";
+			 $result2=mysql_query($sql22);
+			  $rows=mysql_num_rows($result2);
+                      
+			  $no=ceil($rows/$num);
+                          echo "<br><center><p style='font-size:19px;'>Page Number: </p>";
+			  for($i=1;$i<=$no;$i++)
+			  {
+                              ?><a id='pg' href="profile.php?page=<?php echo $i ?>" style="text-decoration:none"><?php echo $i." "; ?></a><?php
+			  }
+                          echo "</center>";
+                    
+                    if(isset($_SESSION['col'])||isset($_SESSION['col2']))   
+                    {
+                        $color = $_SESSION['col'];
+                        $color2 = $_SESSION['col2'];
+                       echo "<script type='text/javascript'>document.getElementById('html').style.backgroundColor =\" ".$color."\"</script> ";
+                        echo "<script type='text/javascript'>document.getElementById('html').style.color =\" ".$color2."\"</script> ";
+                        echo "<script type='text/javascript'>document.getElementById('body').style.backgroundColor =\" ".$color."\"</script> ";
+                        echo "<script type='text/javascript'>document.getElementById('body').style.color =\" ".$color2."\"</script> ";
+                        //echo "<script type='text/javascript'>document.getElementsByTagName('html')[0].style.backgroundColor =\" ".$color."\"</script> ";
+                        //echo "<script type='text/javascript'>document.getElementById('info').style.color =\" ".$color2."\"</script> ";
+                        echo "<script type='text/javascript'>col('$color2');</script>";
+                    }
+                    
                 ?>
             
             </div>
@@ -435,8 +590,6 @@ and open the template in the editor.
         }
         function editBlog(y)
         {
-            //var answer = confirm("Do you want to delete this gallery?");
-
             xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -473,8 +626,6 @@ and open the template in the editor.
 
             function checkusr()
             {
-                //echo "I'm here!! <br>";
-                //echo $url = $_SERVER['HTTP_HOST']."".$_SERVER['PHP_SELF']
                 if($_GET['name'])
                 {
                     if($_GET['name'] === '')
@@ -493,118 +644,3 @@ and open the template in the editor.
     <div id="footer"> Copyrights go to Ali Baokbah, Mansour Malaika and University of Denver, CS Department. &copy </div>
     </body>
 </html>
-
-
-
-<!--
-//. "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
-                /*. "<img id='holder1' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav1\",this)'>" //\"$fav1\"
-                . "<img id='holder2' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav2\",this)'>"
-                . "<img id='holder3' src='hero_icons/heroframe.png' alt='favorite hero' width='50' height='50' onclick=" . "'hero(\"$fav3\",this)'>"
-                */ // THIS IS A WORKING CODE!!!!
-                
-                /*. "<p style='margin-left:1px';>Heroes Preferences:</p><br>"
-                . "<img id='holder1' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav1\",this) alt='favorite hero' width='50' height='50'>" //\"$fav1\"
-                . "<img id='holder2' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav2\",this) alt='favorite hero' width='50' height='50'>"
-                . "<img id='holder3' src='hero_icons/heroframe.png' onload='this.onload=null; this.src=herro(\"$fav3\",this) alt='favorite hero' width='50' height='50'>"
-                    */
-
-
-function test(a)
-        {
-            var image = a;
-            //var image = document.getElementById("holder1");
-            //alert(image.src);
-            if(image.src.match("frame")) {
-                switch(Math.floor((Math.random() * 9) + 1)){
-                    case 1: image.src = "hero_icons/Tassadar.png"; break;
-                    case 2: image.src = "hero_icons/Murky.png"; break;
-                    case 3: image.src = "hero_icons/TheLostVikings.png"; break;
-                    case 4: image.src = "hero_icons/Xul.png"; break;
-                    case 5: image.src = "hero_icons/Anubarak.png"; break;
-                    case 6: image.src = "hero_icons/Chen.png"; break;
-                    case 7: image.src = "hero_icons/Kaelthas.png"; break;
-                    case 8: image.src = "hero_icons/Nazeebo.png"; break;
-                    case 9: image.src = "hero_icons/Rexxar.png"; break;
-                    
-                }
-                        
-                //image.src = "tassicon.png"; //tassicon.png
-            }
-            else {
-                image.src = "hero_icons/heroframe.png";
-                //alert("im here");
-            }
-        }
-
-
-function herro(a,b){
-            var hero = a;
-            var temp;
-            if(hero == "") { return "hero_iconst/heroframe.png"; }
-            else{ temp = "hero_icons/"+ a +".png"; return temp; }
-        }  
-     function hero(a,b){
-            var image = b;
-            var heroo = a;
-            var temp;
-            //alert(heroo);
-            if(heroo == "") { image.src = "hero_icons/heroframe.png"; }
-            else{ 
-                temp = "hero_icons/"+ a +".png";
-                image.src = temp; 
-            }
-            //alert(a);
-        }
-    
---
-
-
-<div id="content">
-        <div id = 'display'>
-                <?php
-                /*$result = mysql_query("select * from abaokbah.mempics WHERE membername='$user' ORDER BY PID DESC");
-                
-                if($result){ //echo "I'm here!!";
-                    
-                    echo "<center>"
-                    . "<input type='text' name='capchange' id='capchange'></center>"
-                            . "<center><p> Enter a new caption and scroll down to modify desired picture</p></center>";
-                    while($row = mysql_fetch_array($result)) 
-                    {
-                        $row['picname'] = str_replace(' ', '', $row['picname']);
-                        
-                        echo "<div><span id='picinfo'>Posted by: ". "<a href='profile.php?name="
-                        .$row['membername']."'> ".$row['membername']."</a></span>"."<span id='date'>Posted on: " 
-                                .$row['OrderDate'] ."</span></div>";
-                        echo "<center><p>". $row['caption']. "</p></center>";
-                        echo "<center><img src=./pics/" . $row['picname'] ."></center>";
-                        if($row['membername']===$keyholder){
-                            $pc = $row['picname'];
-                            echo "<center><input id='change' type='button' value='CHANGE CAPTION' onclick='changecap(\"$pc\")'></center>";
-                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deletepic(\"$pc\")'></center>";
-                        }
-                    }
-                }
-                
-                $result2 = mysql_query("select * from abaokbah.fp_blog WHERE memname='$user' ORDER BY blog_id DESC");
-                
-                if($result2){ //echo "I'm here!!";
-                    while($row = mysql_fetch_array($result2)) 
-                    {
-                        echo "<div><span id='picinfo'>Posted by:". "<a href='profile.php?name="
-                        .$row['memname']."'> ".$row['memname']."</a></span>"."<span id='date'>Posted on: " 
-                                .$row['OrderDate'] ."</span></div>"; /// I changed date_time to OrderDate
-                        
-                        echo "<center><p>". $row['blog_title']. "</p></center>";
-                         echo "<center><p>". $row['blog']. "</p></center>";
-                        if($row['memname']===$keyholder){
-                            $pc = $row['blog_id'];
-                            echo "<center><input id='change' type='button' value='EDIT BLOG' onclick='editBlog(\"$pc\")'></center>";
-                            echo "<center><input id='delete' type='button' value='DELETE' onclick='deleteBlog(\"$pc\")'></center>";
-                        }
-                    }
-                }*/
-                ?>
-            </div>
-    </div>-->

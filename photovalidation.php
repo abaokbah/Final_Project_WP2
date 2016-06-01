@@ -21,19 +21,17 @@
             ($_FILES["myfile"]["type"] == "image/pjpeg") ||
             ($_FILES["myfile"]["type"] == "image/x-png") ||
             ($_FILES["myfile"]["type"] == "image/png")) &&
-            ($_FILES["myfile"]["size"] < 1048576) &&
+            ($_FILES["myfile"]["size"] < 5242880) &&
             in_array($ext, $allowed_Ext)) {
         if ($_FILES["myfile"]["error"] > 0) {
             echo "<br>";
             echo "Return Code: " . $_FILES["myfile"]["error"] . "<br>";
         } else {
             if (file_exists("./pics/" . $filename)) {
-                //echo "File already exsists.";
+                
             } else {
                 move_uploaded_file($_FILES["myfile"]["tmp_name"], "./pics/" . $filename);
                 
-                //echo $_FILES["myfile"]["tmp_name"];
-                //echo "./pics/" . $filename;
             }
             echo "<center><img src= ./pics/" . $filename . "><center>";
             array_push($_SESSION['pics'], $filename);
@@ -49,7 +47,6 @@
         echo "File Invalid";
         echo "<br>";
     }
-    //setcookie("list", serialize($_SESSION["pics"]), time() + (60*60*24*7));
 ?>
 
 

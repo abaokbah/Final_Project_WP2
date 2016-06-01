@@ -17,7 +17,7 @@ body {
 
 #myform {    
     position:relative;
-    top:50px;
+    top:30px;
     left:90px;
     width:90%;
     //background:gray;
@@ -46,6 +46,25 @@ h2 {
     top:20px;
     background:black;
     width:90%;
+}
+
+#menutable {
+    width:100%; background-color: #BDBCB7;
+    
+}
+
+#menutable td {
+    font-family: monaco; font-size: 16px; padding-right:15px; padding-left: 60px; text-align: center;
+}
+
+#footer{
+    text-align: center;
+    //float: center;
+    font-family: calibri;
+    font-size: 20px;
+    background-color: #BDBCB7;
+    font-weight: bold;
+    float:bottom;
 }
 
 /*#test{

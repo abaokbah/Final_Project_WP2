@@ -4,14 +4,59 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html id='html'>
     <head>
         <meta charset="UTF-8">
             <link rel="stylesheet" type="text/css" href="AssignmentStylesheet.css">
-        <title></title>
+        <title>The Colosseum | Edit</title>
     </head>
     <body id="body">
-	
+        <style>
+            
+            h5{
+                font-size:16px;
+            }
+            
+        </style>
+        <table class="upperBanner">
+            <a href="home.php">
+                <center><img id="upbanner" src="HOTS-Open-Beta-screen.png" alt="heroes background" 
+                            width="100%" height="210">
+                </center></a>
+        </table> 
+        <!-- Content menu section -->
+        <table id="menutable">
+            <tr>
+                <td><a id="home" href="home.php">HOME</a></td>
+                <td><a id="profile" href="profile.php">PROFILE</a></td>
+                <td><a id="about" href="about.php">ABOUT</a></td>
+                <td><a id="upcoming" href="index.php">LOGOUT</a></td>
+            </tr>
+        </table>
+    <!-- Styling pillars section section -->
+    <span id="rightpillar"></span>
+    
+    <span id="leftpillar"></span>
+	<script>
+        function col(a){
+            var foo = document.getElementsByTagName('li');
+            var foo2 = document.getElementsByTagName('p');
+            var foo3 = document.getElementsByTagName('div');
+            var foo4 = document.getElementsByTagName('span');
+            for(i=0;i<foo.length;i++){
+                foo[i].style.color=a;
+            }
+            for(i=0;i<foo2.length;i++){
+                foo2[i].style.color=a;
+            }
+            for(i=0;i<foo3.length;i++){
+                foo3[i].style.color=a;
+            }
+            for(i=0;i<foo4.length;i++){
+                foo4[i].style.color=a;
+            }
+        }
+    </script>
     <?php
           include("connection.php");
           session_start();
@@ -37,9 +82,8 @@ and open the template in the editor.
 
 
 
-            echo'<h5>Blog:</h5>';
-            echo'<br>';
-            echo"<textarea id='blog' name='fblog' rows='30' cols='135'> $blog</textarea>";
+            echo"<h5 style='margin-bottom:0px;'>Blog:</h5>";
+            echo"<textarea id='blog' name='fblog' rows='30' cols='135' style='width:85%; height:150px; margin-left:30px;'> $blog</textarea>";
             echo'<input id="mybutton" name="submit" type="submit" value="submit">';
         echo'</form>';
 
@@ -56,7 +100,18 @@ and open the template in the editor.
                 mysql_close($con);
         }
                     
-              
+            if(isset($_SESSION['col'])||isset($_SESSION['col2']))   
+        {
+            $color = $_SESSION['col'];
+            $color2 = $_SESSION['col2'];
+           echo "<script type='text/javascript'>document.getElementById('html').style.backgroundColor =\" ".$color."\"</script> ";
+	    echo "<script type='text/javascript'>document.getElementById('html').style.color =\" ".$color2."\"</script> ";
+            echo "<script type='text/javascript'>document.getElementById('body').style.backgroundColor =\" ".$color."\"</script> ";
+	    echo "<script type='text/javascript'>document.getElementById('body').style.color =\" ".$color2."\"</script> ";
+            //echo "<script type='text/javascript'>document.getElementsByTagName('html')[0].style.backgroundColor =\" ".$color."\"</script> ";
+	    //echo "<script type='text/javascript'>document.getElementById('info').style.color =\" ".$color2."\"</script> ";
+            echo "<script type='text/javascript'>col('$color2');</script>";
+        }  
               
               
               
@@ -115,7 +170,7 @@ and open the template in the editor.
             return msg;
         }
         </script>
-        <div id="footer">Copyright © Computerscience.du.edu</div>
+        <div id="footer"> Copyrights go to Ali Baokbah, Mansour Malaika and University of Denver, CS Department. &copy </div>
     </body>
 	
 </html>
